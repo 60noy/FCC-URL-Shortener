@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:key',(req,res,next)=>{
   db.findOne({key: req.params.key},(err,url)=>{
-    console.log('path:'+url.path);
+    console.log('path:'+url);
     if(err)
       next(new Error(err))
     else if(!url)
