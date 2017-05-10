@@ -8,7 +8,7 @@ var mongoose = require('mongoose')
 var index = require('./routes/index');
 // mongod --dbpath D:\freecodecamp\url_shortener\data
 var app = express();
-mongoose.connect('mongodb://localhost/devdb')
+mongoose.connect('mongodb://Noy:Baden123@ds137141.mlab.com:37141/heroku_947trkqw')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -8,40 +8,33 @@ router.get('/', function(req, res, next) {
 });
 
 
-// redirect to the url by its is
-router.get('/:id', (req,res,next)=>{
-  db.findById(req.params.id,(err,url) =>{
-    if (err) {
-      res.send(new Error('No such path'))
-    }
-    else
-    res.status(200).json({error: false, url: url.path})
-  })
-})
 
-router.get('/api/:id',(req,res,next)=>{
-  db.findById(req.params.id,(err,url)=>{
-    console.log('id:'+req.id);
+
+router.get('/:key',(req,res,next)=>{
+  db.findOne({key: req.params.key},(err,url)=>{
+    console.log('path:'+url.path);
     if(err)
       next(new Error(err))
     else if(!url)
-      next(new Error('Url is not found'))
+      return next(new Error('Url is not found'))
       else
-      res.send('url is found!' + url)
+      res.redirect(url.path)
   })
 })
 
 router.post('/api',(req,res,next) =>{
   let path = req.body.path
+  let key = randomstring.generate(6)
   let url = new db({
-    path
+    path,
+    key
   })
   console.log('path',path);
   url.save((err)=> {
     if(err)
     return next(new Error(err))
     else
-    res.json({message:'success', url: {_id: url._id,path: url.path}})
+    res.json({message:'success', url: url})
   })
 
 })

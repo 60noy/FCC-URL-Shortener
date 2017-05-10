@@ -23,6 +23,10 @@ html,body {
 .wrapper{
   flex: 1;
 }
+
+#a{
+  font-size: 1.2em;
+}
 .output-label{
   display:block;
 }

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 var url = new mongoose.Schema({
-  path: {type: String, required: true}
+  path: {type: String, required: true},
+  key: {type: String, unique: true}
 
 })
 

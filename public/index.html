@@ -12,7 +12,6 @@
     <title>Yo</title>
   </head>
   <body>
-
     <div class="container">
       <div id="title">
         URL Shortener
@@ -21,17 +20,18 @@
           <label class="mdl-textfield__label" for="input-url">Enter URL</label>
           <input type="text" class="mdl-textfield__input wider_textfield" id="input-url"/>
         </div>
-          <!-- <input type="button" value="generate" class="btn" id="btn-submit-url" data-clipboard-action="copy" data-clipboard-target="#output-url" name="btn-submit-url"  /> -->
           <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"  data-clipboard-target="#output-url" id="btn-submit-url">generate</button>
           <div class="output-section">
             <div class="mdl-textfield mdl-js-textfield">
               <label class="mdl-textfield__label output-label" for="mdl-textfield__input">Your embedded URL Here</label>
               <input type="text" id="output-url" class="mdl-textfield__input" />
-
             </div>
               <button type="button" class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" data-clipboard-action="copy" data-clipboard-target="#output-url" id="btn-copy-url">
                 <i class="material-icons">content_copy</i>
               </button>
+              <div>
+                <a id="output-link" class="primary-dark"></a>
+              </div>
           </div>
     <div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
       <div class="mdl-snackbar__text"></div>

@@ -32,7 +32,9 @@ function sendURL(url){
   },
   (data,status) =>{
     if (status === 'success') {
-        document.querySelector('#output-url').parentNode.MaterialTextfield.change(ip +'/' + data.url._id)
+        document.querySelector('#output-url').parentNode.MaterialTextfield.change(ip +'/' + data.url.key)
+        $("#output-link").attr('href',ip +'/' + data.url.key)
+        $("#output-link").text(ip +'/' + data.url.key)
          var successful = document.execCommand('copy');
          successful && showSnackBar()
 
