@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  const ip = 'https://localhost:3000'
+  const ip = 'https://urlthis.herokuapp.com'
   $("#btn-submit-url").click(() => {
     let url = $('#input-url').val()
     if (validateURL(url)) {
