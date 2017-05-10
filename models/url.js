@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 var url = new mongoose.Schema({
   path: {type: String, required: true},
-  key: {type: String, unique: true}
-
+  key: {type: String, unique: true},
+  clicks: {type: Number, default: 0},
 })
 
 // after I finish- add   data: {

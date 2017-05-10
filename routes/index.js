@@ -17,8 +17,14 @@ router.get('/:key',(req,res,next)=>{
       next(new Error(err))
     else if(!url)
       return next(new Error('Url is not found'))
-      else
-      res.redirect(url.path)
+      else{
+      let score = url.score+1
+      url.update({score: score}, (err) =>{
+        if(err)
+          next(new Error('errow updating url info'))
+        res.redirect(url.path)
+      })
+    }
   })
 })
 
@@ -27,7 +33,8 @@ router.post('/api',(req,res,next) =>{
   let key = randomstring.generate(6)
   let url = new db({
     path,
-    key
+    key,
+    clicks: 0
   })
   console.log('path',path);
   url.save((err)=> {
