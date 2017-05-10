@@ -7,8 +7,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-
-
+router.get('/all', (req,res,next) =>{
+  db.find((err,urls) => {
+    if (err) {
+      next(new Error(err))
+    }
+    res.json({urls: urls})
+  }).limit(10)
+})
 
 router.get('/:key',(req,res,next)=>{
   db.findOne({key: req.params.key},(err,url)=>{
@@ -18,8 +24,8 @@ router.get('/:key',(req,res,next)=>{
     else if(!url)
       return next(new Error('Url is not found'))
       else{
-      let score = url.score+1
-      url.update({score: score}, (err) =>{
+      let clicks = url.clicks+1
+      url.update({clicks: clicks}, (err) =>{
         if(err)
           next(new Error('errow updating url info'))
         res.redirect(url.path)
