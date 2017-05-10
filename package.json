@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "mstart": "mongod --dbpath ./data"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
+    "clipboard": "^1.6.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",

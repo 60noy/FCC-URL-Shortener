@@ -7,12 +7,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/test', function(req,res,next) {
-  res.status(200).send('hi')
-})
 
 // redirect to the url by its is
-router.get('/redirect/:id', (req,res,next)=>{
+router.get('/:id', (req,res,next)=>{
   db.findById(req.params.id,(err,url) =>{
     if (err) {
       res.send(new Error('No such path'))
@@ -22,7 +19,7 @@ router.get('/redirect/:id', (req,res,next)=>{
   })
 })
 
-router.get('/id/:id',(req,res,next)=>{
+router.get('/api/:id',(req,res,next)=>{
   db.findById(req.params.id,(err,url)=>{
     console.log('id:'+req.id);
     if(err)
@@ -34,14 +31,11 @@ router.get('/id/:id',(req,res,next)=>{
   })
 })
 
-
-
-router.post('/',(req,res,next) =>{
+router.post('/api',(req,res,next) =>{
   let path = req.body.path
   let url = new db({
     path
   })
-
   console.log('path',path);
   url.save((err)=> {
     if(err)

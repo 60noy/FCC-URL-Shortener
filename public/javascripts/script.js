@@ -1,32 +1,62 @@
 $(document).ready(() => {
+  const ip = 'http://localhost:3000'
   $("#btn-submit-url").click(() => {
     let url = $('#input-url').val()
-    // if(validate(url) => then continue else show errors)
-    // alert(url)
-    sendURL(url)
+    if (validateURL(url)) {
+        sendURL(url)
+    }
   })
 
-})
+  $("#btn-copy-url").click(() => {
+    if($("#output-url").val())
+    copyText()
+    else
+    alert('Output field is empty')
+  })
+  // validate the input url and returns whether there is an error
+  function validateURL(url){
+    var pattern = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
+ if(!pattern.test(url)) {
+   alert("Please enter a valid URL.");
+   return false;
+ } else {
+   return true;
+  }
+}
 
 function sendURL(url){
-  // let data =
-  // console.log('data',data);
-  $.ajax('http://localhost:3000/api',
+  // POST the url and get the id
+  $.post(ip+ '/api',
   {
-    type:'post',
-    contentType: 'application/json',
-    dataType: 'application/json',
-    data: JSON.stringify({"path": "dasdasdasdas"}),
-    success: (data) =>{
-      $('#output-url').text(data.url._id)
-      console.log('success! ' + data);
-    },
-    error: (error) =>{
-      console.log('error',error);
-        $('#output-url').text(JSON.parse(error).url._id)
+    "path": url,
+  },
+  (data,status) =>{
+    if (status === 'success') {
+        document.querySelector('#output-url').parentNode.MaterialTextfield.change(ip +'/' + data.url._id)
+         var successful = document.execCommand('copy');
+         successful && showSnackBar()
+
     }
-
+    else {
+      alert('server error')
+    }
+    console.log('data',data);
+    console.log('status',status);
   }
-)
+)}
 
+// copies text and shows snackbar
+function copyText(){
+  var clip = new Clipboard('#btn-copy-url')
+  showSnackBar()
 }
+
+function showSnackBar(){
+  var notification = document.querySelector('.mdl-js-snackbar');
+  notification.MaterialSnackbar.showSnackbar(
+    {
+      message: 'URL was Copied'
+    }
+);
+}
+})
