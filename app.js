@@ -6,9 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
 var index = require('./routes/index');
-// mongod --dbpath D:\freecodecamp\url_shortener\data
+var cors = require('cors')
 var app = express();
-mongoose.connect('mongodb://Noy:Baden123@ds137141.mlab.com:37141/heroku_947trkqw')
+mongoose.connect('mongodb://Noy:test@ds137141.mlab.com:37141/heroku_947trkqw')
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
