@@ -1,7 +1,6 @@
 $(document).ready(() => {
-  getDataToTable()
-
   const ip = 'https://urlthis.herokuapp.com'
+  getDataToTable()
   $("#btn-submit-url").click(() => {
     let url = $('#input-url').val()
     // send the url to the server if is valid
